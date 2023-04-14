@@ -11,6 +11,7 @@ router.use(express.json());
 router.post('/', async (req, res) => {
   try {
     let intentData = intentMaker(req.body.url);
+    console.log(intentData)
     let { appName, key } = await db.put({ key: id(), views: 1, ...intentData })
     res.json({ error: false, message: "success", appName, key });
   } catch (error) {

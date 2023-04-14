@@ -1,17 +1,12 @@
 <html>
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:url" content="<%= data.other %>" />
-  <title>Appopener</title>
-</head>
-
 <body>
   <script>
-    const intents = JSON.parse('<%- JSON.stringify(data) %>');
+    const data = JSON.parse('<%- JSON.stringify(data) %>');
     const os = JSON.parse('<%- JSON.stringify(os) %>');
-    window.location.replace(intents[os]);
-    setTimeout(() => { window.location = intents["other"]; }, 200);
+    console.log(data, os);
+    window.location.replace(data[`intent_${os}`]);
+    setTimeout(() => { window.location = data[`intent_web`]; }, 250);
   </script>
 </body>
 

@@ -1,284 +1,100 @@
 <!DOCTYPE html>
-<html lang="en" style="--color-primary:#9772FB;">
+<html lang="en" data-theme="dracula">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Appopener</title>
+  <title>Appopener 🔗 </title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
-
-    :root {
-      --space-root: 1rem;
-      --space-xs: calc(var(--space-root) / 2);
-      --space-s: calc(var(--space-root) / 1.5);
-      --space-m: var(--space-root);
-      --space-l: calc(var(--space-root) * 1.5);
-      --space-xl: calc(var(--space-root) * 2);
-      --color-primary: rgb(255, 255, 255);
-      --color-secondary: black;
-      --base-border-radius: 0.25rem;
-      --ease: cubic-bezier(0.075, 0.82, 0.165, 1);
-      --duration: 350ms;
-      --font-family: "Acme", sans-serif;
-      --font-size: 1.25rem;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
 
     body {
-      display: grid;
-      place-items: center;
       margin: 0;
+      font-family: 'Lilita One', sans-serif;
+    }
+
+    .wrapper {
+      width: 100vw;
       height: 100vh;
-      padding: var(--space-m);
-      font-size: var(--font-size);
-      font-family: var(--font-family);
-      line-height: 1.2;
-      background-color: var(--color-primary);
-      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle r='5' cx='5' cy='5' fill='black'/%3E%3C/svg%3E"), auto;
+      /* position: absolute; */
+      background: linear-gradient(45deg, #F17C58, #E94584, #24AADB);
+      background-size: 600% 100%;
+      animation: gradient 16s linear infinite;
+      animation-direction: alternate;
     }
 
-    a {
-      color: var(--color-primary);
+    @keyframes gradient {
+      0% {
+        background-position: 0%
+      }
+
+      100% {
+        background-position: 100%
+      }
     }
 
-    a:focus {
-      color: var(--color-secondary);
-    }
-
-    h2 {
-      font-weight: 800;
-      font-size: calc(var(--font-size) * 1.5);
-      font-family: "Acme", sans-serif;
-    }
-
-    .form {
-      position: relative;
-      width: 100%;
-      max-width: 450px;
-      margin: 0 auto;
-      transform: skewY(-5deg) translateY(10%) scale(0.94);
-      transition: box-shadow var(--duration) var(--ease),
-        transform var(--duration) var(--ease);
-    }
-
-    .form:before,
-    .form:after {
-      content: "";
-      position: absolute;
-      pointer-events: none;
-      background-color: #ebebeb;
-      width: 25%;
-      height: 100%;
-      transition: background-color var(--duration) var(--ease),
-        transform var(--duration) var(--ease);
-    }
-
-    .form:before {
-      top: 0;
-      right: calc(100% - 1px);
-      transform-origin: 100% 100%;
-      transform: skewY(-35deg) scaleX(-1);
-      z-index: -1;
-    }
-
-    .form:after {
-      top: 0;
-      left: calc(100% - 1px);
-      transform-origin: 0 0;
-      transform: skewY(-35deg) scaleX(-1);
-      z-index: 2;
-    }
-
-    .form:hover,
-    .form:focus-within {
-      transform: scale(1.0001);
-      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
-    }
-
-    .form:hover:before,
-    .form:focus-within:before,
-    .form:hover:after,
-    .form:focus-within:after {
-      background-color: white;
-      transform: skewY(0);
-    }
-
-    .form-inner {
-      padding: var(--space-xl);
-      background-color: white;
-      z-index: 1;
-      text-align: center;
-    }
-
-    .form-inner>*+* {
-      margin-top: var(--space-xl);
-    }
-
-    .input-wrapper:focus-within label {
-      color: var(--color-secondary);
-    }
-
-    .input-wrapper:focus-within .icon {
-      background-color: var(--color-secondary);
-    }
-
-    .input-wrapper:focus-within input {
-      border-color: var(--color-secondary);
-    }
-
-    .input-wrapper+.input-wrapper {
-      margin-top: var(--space-l);
-    }
-
-    .input-group {
-      position: relative;
-    }
-
-    .input-group input {
-      border-radius: var(--base-border-radius);
-      padding-left: calc(var(--space-s) + 60px);
-    }
-
-    .input-group .icon {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      border-top-left-radius: var(--base-border-radius);
-      border-bottom-left-radius: var(--base-border-radius);
-      pointer-events: none;
-    }
-
-    label {
-      font-size: calc(var(--font-size) / 1.65);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.065rem;
-      display: block;
-      margin-bottom: var(--space-xs);
-      color: var(--color-primary);
-    }
-
-    .icon {
-      display: flex;
-      align-items: center;
-      flex: 0 1 auto;
-      padding: var(--space-m);
-      background-color: var(--color-primary);
-    }
-
-    .icon svg {
-      width: 1.25em;
-      height: 1.25em;
-      fill: white;
-      pointer-events: none;
-      user-select: none;
-      transition: transform var(--duration) var(--ease);
-    }
-
-    input {
-      flex: 1 1 0;
-      width: 100%;
-      outline: none;
-      padding: var(--space-m);
-      font-size: var(--font-size);
-      font-family: var(--font-family);
-      color: var(--color-secondary);
-      border: 2px solid var(--color-primary);
-    }
-
-    input:focus {
-      color: var(--color-primary);
-    }
-
-    .btn-group {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .btn-group>*+* {
-      margin-left: var(--space-s);
-    }
-
-    .btn {
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      outline: none;
-      padding: var(--space-m) var(--space-l);
-      cursor: pointer;
-      border: 2px solid transparent;
-      border-radius: var(--base-border-radius);
-    }
-
-    .btn--primary {
-      font-size: calc(var(--font-size) / 1.65);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.065rem;
-      background-color: var(--color-primary);
-      border-color: var(--color-primary);
+    h1 {
       color: white;
+      font-size: 50px !important;
+      font-weight: 500 !important;
+      line-height: 50px;
     }
 
-    .btn--primary:focus {
-      background-color: var(--color-secondary);
-      border-color: var(--color-secondary);
+    ::selection {
+      color: #E94584;
+      background: white;
     }
 
-    .btn--text {
-      font-size: calc(var(--font-size) / 1.5);
-      padding: 0;
+    ::placeholder {
+      color: gray !important;
+      opacity: 1;
     }
 
-    #url {
-      color: black;
+    input[type="text"] {
+      background-color: white;
+      color: #454545;
+    }
+
+    .glass {
+      color: white !important;
+    }
+
+    .input {
+      width: 103%;
     }
   </style>
 </head>
 
 <body>
-  <form class="form" id="form" autocomplete="off">
-    <div class="form-inner">
-      <h2>Appopener</h2>
-      <div class="input-wrapper">
-        <div class="input-group">
-          <span class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg"
-              viewBox="0 0 16 16">
-              <path
-                d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
-              <path
-                d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z" />
-            </svg>
-          </span>
-          <input type="text" id="url" data-lpignore="true" placeholder="Enter URL Here!">
+  <div class="wrapper">
+    <div class="flex h-screen">
+      <div class="m-auto">
+        <div class="container px-4 space-y-2 grid place-items-center">
+          <h1 id="message" class="text-center mb-5">Appopener | Deeplinking</h1>
+          <input id="url" type="text" placeholder="Enter a link..." class="input" />
+          <button id="button" class="btn btn-ghost btn-wide btn-outline glass">Make</button>
         </div>
       </div>
     </div>
-  </form>
+  </div>
   <script defer>
-    const form = document.getElementById("form");
-    const colors = ["#764AF1", "#FF4949", "#DEA057", "#FF8C32", "#F24A72", "#F0A500", "#5463FF", "#CC9544", "#5FD068", "#F47C7C", "#9772FB", "#F8B400", "#4D96FF", "#E84545", "#E8505B", "#FF9292",];
-    document.querySelector(":root").style.setProperty("--color-primary", colors[Math.floor(Math.random() * 16)], null);
     function validURL(link) {
       var valid = link.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
       return valid !== null;
     }
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+
+    const button = document.getElementById("button");
+
+    button.addEventListener("click", async (e) => {
       let urle = document.getElementById("url");
       var url = urle.value;
+      if (!url) return
       (!(url.indexOf("http://") === 0 || url.indexOf("https://") === 0)) ? url = `http://${url}` : "";
       if (!validURL(url)) {
         alert("Please Enter a Valid URL");
       } else {
+        console.log(url);
         let response = await fetch("https://appopener.xyz/api", {
           method: "POST",
           body: JSON.stringify({ url }),
@@ -290,7 +106,11 @@
           alert(`https://appopener.xyz/${key}\nSmart Link Copied To Clipboard!`)
         });
       }
-    });
+    })
+
+    if (screen.width < 1000) {
+      document.getElementById("message").innerText = "Appopener 🔗";
+    }
   </script>
 </body>
 
